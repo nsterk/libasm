@@ -2,5 +2,9 @@
 
 			section	.text
 _start:		mov		rax, 60
-			mov		rdi, 25
+			push	word [var]
+			pop		rdi
 			syscall
+
+			section .data
+var:		db		99

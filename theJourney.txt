@@ -1,0 +1,26 @@
+
+1. Learning how to do a syscall
+
+_start:		mov		rax, 60 ; The code of the function I want to call needs to be placed in the RAX register. The code for exit() is 60
+			mov		rdi, 25 ; The first parameter to the function I am calling needs to be placed in the RDI register. I want to return 25 (so I can echo the return value and see that it worked)
+			syscall			; Invoke the system call
+
+2. Learning how to use the stack
+_start:		mov		rax, 60	; Same as part 1
+			push	30		; I am pushing the value 30 onto the stack
+			pop		rdi		; I am popping whatever is on top of the stack into RDI. So I'm doing the same as in part 1 (with 30 instead of 25), but instead of directly placing 30 into RDI, I use the stack for it. Which makes no sense code-wise but makes sense learning-wise
+			syscall			; Invoke the system call
+
+3. Combining the stack with memory
+			section	.text
+_start:		mov		rax, 60
+			push	word [var] ; see below
+			pop		rdi
+			syscall
+
+			section .data
+var:		db		99		; place the number 99 in memory
+
+About push word[var]
+I initially tried 'push [var]', which gave the following error: error: operation size not specified. When you are referencing memory like this, you must specificy the operatoin size (https://stackoverflow.com/questions/75024923/error-operation-size-not-specified-on-push-operation-assembly-x86)
+Then I tried 'push dword [var], which gave the followin error: error: instruction not supported in 64-bit mode

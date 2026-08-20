@@ -8,6 +8,7 @@
 nasm -felf64 -g play.s && ld play.o && ./a.out
 
 ## Useful references
+Syscall convention cheat sheet: https://x64.syscall.sh/
 NASM Tutorial: https://cs.lmu.edu/~ray/notes/nasmtutorial/
 Linux syscall table: https://filippo.io/linux-syscall-table/
 NASM documentation: https://www.nasm.us/xdoc/3.02/nasmdoc.pdf
