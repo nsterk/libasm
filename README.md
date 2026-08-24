@@ -13,6 +13,10 @@ NASM documentation: https://www.nasm.us/xdoc/3.02/nasmdoc.pdf
 Registers and calling convention, Harvard: https://cs61.seas.harvard.edu/site/2018/Asm1/
 Memory layout, Harvard: https://cs61.seas.harvard.edu/site/2018/Datarep3/
 
+Calling coonventoins: https://en.wikibooks.org/wiki/X86_Disassembly/Calling_Conventions
+Functions and stack frames: https://en.wikibooks.org/wiki/X86_Disassembly/Functions_and_Stack_Frames
+Calling functoins in assembly: https://www.cs.cornell.edu/courses/cs3410/2026sp/notes/asm-call.html
+
 ## Maybe useful refs
 Registers https://www.cs.uaf.edu/2017/fall/cs301/lecture/09_11_registers.html
 System calls: https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/Syscall.html

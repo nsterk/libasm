@@ -11,4 +11,4 @@ _start:		mov		rax, 1
 			syscall
 
 			section	.data
-msg: 		db		"Momo is de shit", 10 ; in de tutorial heeft ie het over een new line maar das gewoon de int 10, das ascii newline
+msg: 		db		"Momo is the love of my life", 10 ; in de tutorial heeft ie het over een new line maar das gewoon de int 10, das ascii newline
