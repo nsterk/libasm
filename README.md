@@ -4,9 +4,6 @@
 
 # I am a work in progress and only useful to Naomi
 
-## How 2 handle lack of Makefile
-nasm -felf64 -g play.s && ld play.o && ./a.out
-
 ## Useful references
 Syscall convention cheat sheet: https://x64.syscall.sh/
 NASM Tutorial: https://cs.lmu.edu/~ray/notes/nasmtutorial/
