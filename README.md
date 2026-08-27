@@ -23,3 +23,5 @@ System calls: https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/Syscall.html
 xmm registers: https://www.cs.uaf.edu/2017/fall/cs301/lecture/10_02_float_asm.html
 x86 Assembly Guide university of virgina: https://www.cs.virginia.edu/~evans/cs216/guides/x86.html
 
+## compiling the C program:
+gcc -g main.c -L. -lasm

@@ -4,8 +4,7 @@ CC			=	nasm
 FLAGS		=	-felf64 -g
 OPTIONS		=	ar rcs
 
-
-SRCS		:=	srcs/ft_strlen.s
+SRCS		:=	ft_strlen.s
 
 OBJS		=	$(SRCS:%.s=%.o)
 
@@ -15,16 +14,15 @@ $(NAME):	$(OBJS)
 		$(OPTIONS) $(NAME) $(OBJS)
 
 %.o: %.s	$(HEADER)
-	@printf "Creating Libasm objects... %-33.33s\r" $@
-	@$(CC) -c $(FLAGS) -o $@ $<
-
+	@$(CC) $(FLAGS) -o $@ $<
 
 clean:
-	@ -rm f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-	@ -rm f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus %.o
+.PHONY: all clean fclean re %.o
+
