@@ -11,10 +11,14 @@ OBJS		=	$(SRCS:%.s=%.o)
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-		$(OPTIONS) $(NAME) $(OBJS)
+	$(OPTIONS) $(NAME) $(OBJS)
 
 %.o: %.s	$(HEADER)
 	@$(CC) $(FLAGS) -o $@ $<
+
+test:	$(NAME)
+	@gcc main.c -g -L. -lasm -o test
+	@./test
 
 clean:
 	@rm -f $(OBJS)
@@ -22,7 +26,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-re: fclean all
+re: @fclean all
 
 .PHONY: all clean fclean re %.o
 
