@@ -4,7 +4,8 @@ CC			=	nasm
 FLAGS		=	-felf64 -g
 OPTIONS		=	ar rcs
 
-SRCS		:=	ft_strlen.s
+SRCS		:=	ft_strlen.s ft_write.s
+TEST_SRC	:=	main.c
 
 OBJS		=	$(SRCS:%.s=%.o)
 
@@ -16,8 +17,8 @@ $(NAME):	$(OBJS)
 %.o: %.s	$(HEADER)
 	@$(CC) $(FLAGS) -o $@ $<
 
-test:	$(NAME)
-	@gcc main.c -g -L. -lasm -o test
+test:	$(TEST_SRC) $(NAME) 
+	@gcc main.c -g -fsanitize=address -L. -lasm -o test
 	@./test
 
 clean:
