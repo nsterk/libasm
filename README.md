@@ -18,6 +18,8 @@ Functions and stack frames: https://en.wikibooks.org/wiki/X86_Disassembly/Functi
 Calling functoins in assembly: https://www.cs.cornell.edu/courses/cs3410/2026sp/notes/asm-call.html
 
 Comment explaining how errno gets set on linux: https://stackoverflow.com/questions/29047592/accessing-errno-h-in-assembly-language/29051118
+Memory mapping in Linux: https://linux-kernel-labs.github.io/refs/heads/master/labs/memory_mapping.html
+Linux ABI descriptoin: https://docs.kernel.org/admin-guide/abi.html 
 
 ## Maybe useful refs
 Registers https://www.cs.uaf.edu/2017/fall/cs301/lecture/09_11_registers.html
