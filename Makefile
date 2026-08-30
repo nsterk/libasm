@@ -4,7 +4,7 @@ CC			=	nasm
 FLAGS		=	-felf64 -g
 OPTIONS		=	ar rcs
 
-SRCS		:=	ft_strlen.s ft_write.s
+SRCS		:=	ft_strlen.s ft_write.s ft_read.s
 TEST_SRC	:=	main.c
 
 OBJS		=	$(SRCS:%.s=%.o)
