@@ -1,10 +1,10 @@
 NAME		=	libasm.a
-HEADER		=	libasm.h
+HEADER		=	inc/libasm.h
 CC			=	nasm
 FLAGS		=	-felf64 -g
 OPTIONS		=	ar rcs
 
-SRCS		:=	ft_strlen.s ft_write.s ft_read.s
+SRCS		=	src/ft_strlen.s src/ft_write.s src/ft_read.s src/ft_strcmp.s
 
 OBJS		=	$(SRCS:%.s=%.o)
 

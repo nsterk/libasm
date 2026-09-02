@@ -1,25 +1,20 @@
-NAME		=	libasm.a
-HEADER		=	libasm.h
-CC			=	nasm
-FLAGS		=	-felf64 -g
-OPTIONS		=	ar rcs
+NAME		:=	test
 
-SRCS		:=	ft_strlen.s ft_write.s ft_read.s
-TEST_SRC	:=	main.c
+CFLAGS		=	-g
+IFLAGS		:=	-I lib/libasm/inc
+LIBASM_A	:= 	lib/libasm/libasm.a
 
-OBJS		=	$(SRCS:%.s=%.o)
+SRCS		:=	main.c
 
-all:		$(NAME)
+OBJS		=	$(SRCS:%.c=%.o)
 
-$(NAME):	$(OBJS)
-	$(OPTIONS) $(NAME) $(OBJS)
+all:	$(LIBASM_A) $(NAME)
 
-%.o: %.s	$(HEADER)
-	@$(CC) $(FLAGS) -o $@ $<
+$(NAME): $(LIBASM_A) $(OBJS)
+	@gcc $(OBJS) $(LIBASM_A) $(CFLAGS) $(IFLAGS) -o $(NAME)
 
-test:	$(TEST_SRC) $(NAME) 
-	@gcc main.c -g -fsanitize=address -L. -lasm -o test
-	@./test
+%.o: %.c
+	@gcc $(CFLAGS) -c $< $(IFLAGS) -o $@
 
 clean:
 	@rm -f $(OBJS)
@@ -29,5 +24,5 @@ fclean: clean
 
 re: @fclean all
 
-.PHONY: all clean fclean re %.o
+.PHONY: clean fclean re %.o
 
