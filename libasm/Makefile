@@ -4,7 +4,8 @@ CC			=	nasm
 FLAGS		=	-felf64 -g
 OPTIONS		=	ar rcs
 
-SRCS		=	src/ft_strlen.s \
+SRCS		=	src/momolen.s \
+				src/ft_strlen.s \
 				src/ft_write.s \
 				src/ft_read.s \
 				src/ft_strcmp.s \
@@ -27,7 +28,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-re: @fclean all
+re: fclean all
 
 .PHONY: all clean fclean re %.o
 
