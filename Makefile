@@ -1,8 +1,8 @@
 NAME		:=	test
 
 CFLAGS		=	-g
-IFLAGS		:=	-I lib/libasm/inc
-LIBASM_A	:= 	lib/libasm/libasm.a
+IFLAGS		:=	-I libasm/inc
+LIBASM_A	:= 	libasm/libasm.a
 
 SRCS		:=	main.c
 

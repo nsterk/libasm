@@ -1,5 +1,4 @@
-#include "lib/libasm/inc/libasm.h"
-#include "lib/Unity/src/unity.h"
+#include "libasm/inc/libasm.h"
 #include <stdio.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -45,7 +44,19 @@ int main(void) {
 
 	/*FT_STRCMP*/
     printf(BACK_GRN" ft_strcmp "RST"\n");
-	const char *s1 = "Hello is it m\0e you're looking for\0";
-	const char *s2 = "Hello is it m\0omo you're looking for\0";
+	const char *s1 = "Hello is it me you're looking for\0";
+	const char *s2 = "Hello is it momo you're looking for\0";
 	printf("returnv alue ft_strcmp: %i\n",ft_strcmp(s1, s2));
+
+	/*FT_STRCPY*/
+	printf(BACK_GRN" ft_strcpy "RST"\n");
+	char tmp3[] = "momo\0";
+	char tmp4[] = "\0\0\0\0\0\0\0\0";
+
+	ft_strcpy(tmp4, tmp3);
+	printf("strcpy des: %s\n", tmp4);
+
+	/*FT_STRDUP */
+	char *dupped = ft_strdup("c to the heck\0");
+	printf("the dupped string: %s\n", dupped);
 }

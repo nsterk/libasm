@@ -11,7 +11,7 @@ ft_strcmp:
 		cmp r9b, r10b
 		jne	strcmp.done
 
-		cmp	r10b, byte 0
+		cmp	r10b, 0
 		je	strcmp.done
 		inc rdi
 		inc rsi
