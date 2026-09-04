@@ -1,10 +1,15 @@
 NAME		:=	test
-
 CFLAGS		=	-g
-IFLAGS		:=	-I libasm/inc
-LIBASM_A	:= 	libasm/libasm.a
+IFLAGS		:=	-I lib/inc
+LIBASM_A	:= 	lib/libasm.a
 
-SRCS		:=	main.c
+SRCS		:=	main.c \
+				tests/test_strlen.c \
+				tests/test_write.c \
+				tests/test_read.c \
+				tests/test_strdup.c \
+				tests/test_strcmp.c \
+				tests/test_strcpy.c
 
 OBJS		=	$(SRCS:%.c=%.o)
 
@@ -16,6 +21,8 @@ $(NAME): $(LIBASM_A) $(OBJS)
 %.o: %.c
 	@gcc $(CFLAGS) -c $< $(IFLAGS) -o $@
 
+run:	
+
 clean:
 	@rm -f $(OBJS)
 
@@ -24,5 +31,5 @@ fclean: clean
 
 re: @fclean all
 
-.PHONY: clean fclean re %.o
+.PHONY: clean fclean re
 

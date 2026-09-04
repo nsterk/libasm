@@ -4,8 +4,7 @@ CC			=	nasm
 FLAGS		=	-felf64 -g
 OPTIONS		=	ar rcs
 
-SRCS		=	src/momolen.s \
-				src/ft_strlen.s \
+SRCS		=	src/ft_strlen.s \
 				src/ft_write.s \
 				src/ft_read.s \
 				src/ft_strcmp.s \
