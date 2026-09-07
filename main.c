@@ -9,6 +9,7 @@ void test_read();
 void test_strdup();
 void test_strcmp();
 void test_strcpy();
+void test_list_size();
 
 int main(void) {
 	test_strlen();
@@ -17,4 +18,6 @@ int main(void) {
 	test_strcmp();
 	test_strdup();
 	test_strcpy();
+
+	test_list_size();
 }

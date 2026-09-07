@@ -5,19 +5,19 @@ ft_strcmp:
 	xor r9, r9
 	xor r10, r10
 	
-	.cmp.loop:
+	.ft_strcmp.loop:
 		mov r9b, [rdi]
 		mov r10b, [rsi]
 		cmp r9b, r10b
-		jne	.done
+		jne	.ft_strcmp.done
 
 		cmp	r10b, 0
-		je	.cmp.done
+		je	.ft_strcmp.done
 		inc rdi
 		inc rsi
-		jmp .cmp.loop
+		jmp .ft_strcmp.loop
 
-	.cmp.done:
+	.ft_strcmp.done:
 		sub r9, r10
 		mov	rax, r9
 		xor r9, r9

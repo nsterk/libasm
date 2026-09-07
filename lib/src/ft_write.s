@@ -1,6 +1,6 @@
 extern __errno_location
 
-	global ft_write
+global ft_write
 
 ft_write:
 	mov	rax, 1 	; The code for making a write call is 1. This needs to be placed in the rax register

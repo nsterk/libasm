@@ -9,7 +9,8 @@ SRCS		:=	main.c \
 				tests/test_read.c \
 				tests/test_strdup.c \
 				tests/test_strcmp.c \
-				tests/test_strcpy.c
+				tests/test_strcpy.c \
+				tests/test_list_size.c
 
 OBJS		=	$(SRCS:%.c=%.o)
 
@@ -29,7 +30,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-re: @fclean all
+re: fclean all
 
 .PHONY: clean fclean re
 
