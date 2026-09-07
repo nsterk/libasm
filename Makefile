@@ -10,7 +10,8 @@ SRCS		:=	main.c \
 				tests/test_strdup.c \
 				tests/test_strcmp.c \
 				tests/test_strcpy.c \
-				tests/test_list_size.c
+				tests/test_list_size.c \
+				tests/test_list_push_front.c
 
 OBJS		=	$(SRCS:%.c=%.o)
 

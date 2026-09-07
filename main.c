@@ -10,14 +10,16 @@ void test_strdup();
 void test_strcmp();
 void test_strcpy();
 void test_list_size();
+void test_list_push_front();
 
 int main(void) {
-	test_strlen();
-	test_write();
-	test_read();
-	test_strcmp();
-	test_strdup();
-	test_strcpy();
+	//test_strlen();
+	//test_write();
+	//test_read();
+	//test_strcmp();
+	//test_strdup();
+	//test_strcpy();
 
-	test_list_size();
+	//test_list_size();
+	test_list_push_front();
 }

@@ -44,6 +44,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strcpy(char *dest, const char *src);
 char 	*ft_strdup(const char *s);
 
-int	ft_list_size(t_list *begin_list);
+int		ft_list_size(t_list *begin_list);
+void	ft_list_push_front(t_list **begin_list, void *data);
 
 #endif

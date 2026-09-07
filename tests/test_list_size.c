@@ -1,6 +1,6 @@
 #include <libasm.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 
 void test_list_size() {
 	t_list head;
@@ -19,5 +19,6 @@ void test_list_size() {
 	int listsize = ft_list_size(&head);
 	printf("Size returned for a list with 3 elements: %i\n", listsize);
 	printf("Size returned for empty list: %i\n", ft_list_size(NULL));
+
 
 }
