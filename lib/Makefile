@@ -4,16 +4,18 @@ CC			=	nasm
 FLAGS		=	-felf64 -g
 OPTIONS		=	ar rcs
 
-SRCS		=	src/ft_strlen.s \
+SRCS :=	src/ft_strlen.s \
 				src/ft_write.s \
 				src/ft_read.s \
 				src/ft_strcmp.s \
 				src/ft_strcpy.s \
-				src/ft_strdup.s \
-				src/ft_list_size.s \
-				src/ft_list_push_front.s
+				src/ft_strdup.s 
 
-OBJS		=	$(SRCS:%.s=%.o)
+BONUS_SRCS	:=	src/ft_list_size.s \
+								src/ft_list_push_front.s
+
+OBJS				:=	$(SRCS:%.s=%.o)
+BONUS_OBJS	:=	$(BONUS_SRCS:%.s=%.o)
 
 all:		$(NAME)
 
@@ -22,6 +24,9 @@ $(NAME):	$(OBJS)
 
 %.o: %.s	$(HEADER)
 	@$(CC) $(FLAGS) -o $@ $<
+
+bonus:	$(OBJS) $(BONUS_OBJS)
+	$(OPTIONS) $(NAME) ${OBJS} $(BONUS_OBJS)
 
 clean:
 	@rm -f $(OBJS)

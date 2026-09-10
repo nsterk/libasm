@@ -4,3 +4,5 @@
 test
 test_file
 gf2
+.vscode
+*.dSYM
