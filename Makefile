@@ -7,16 +7,16 @@ LIBASM_A		:= 	lib/libasm.a
 VPATH 			:= tests
 
 SRCS	:=	main.c \
-					test_strlen.c \
-					test_write.c \
-				tests/test_read.c \
-				tests/test_strdup.c \
-				tests/test_strcmp.c \
-				tests/test_strcpy.c \
+			tests/test_strlen.c \
+			tests/test_write.c \
+			tests/test_read.c \
+			tests/test_strdup.c \
+			tests/test_strcmp.c \
+			tests/test_strcpy.c \
 
 BONUS_SRCS := main_bonus.c \
-							tests/test_list_size.c \
-							tests/test_list_push_front.c
+			tests/test_list_size.c \
+			tests/test_list_push_front.c
 
 OBJS					:=	$(SRCS:%.c=%.o)
 BONUS_OBJS		:=	$(BONUS_SRCS:%.c=%.o)
