@@ -4,6 +4,7 @@
 
 #include <stddef.h>
 #include <unistd.h>
+#include <stdio.h>
 
 #define B_WHT			"\033[1;37m"
 #define B_MAGENTA		"\033[1;35m"

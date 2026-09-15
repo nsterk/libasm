@@ -36,6 +36,9 @@ cd .. && make
 - Procedure linkage table:https://refspecs.linuxfoundation.org/ELF/zSeries/lzsabi0_zSeries/x2251.html#PROCEDURELINKAGETABLE
 	What does wrt ..plt do: "This technique is used to call external procedures/functions whose address isn't known in the time of linking, and is left to be resolved by the dynamic linker at run time."
 
+### x86 instructions
+- https://www.cs.virginia.edu/~evans/cs216/guides/x86.html
+
 ### The stack in assembly
 - Registers and calling convention, Harvard: https://cs61.seas.harvard.edu/site/2018/Asm1/
 - Functions and stack frames: https://en.wikibooks.org/wiki/X86_Disassembly/Functions_and_Stack_Frames
@@ -45,7 +48,6 @@ cd .. && make
 - Registers: https://www.cs.uaf.edu/2017/fall/cs301/lecture/09_11_registers.html
 - Memory layout, Harvard: https://cs61.seas.harvard.edu/site/2018/Datarep3/
 - XMM registers: https://www.cs.uaf.edu/2017/fall/cs301/lecture/10_02_float_asm.html
-
 
 ## Maybe useful refs
 - System calls: https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/Syscall.html

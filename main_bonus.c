@@ -1,16 +1,14 @@
 #include <libasm.h>
 // #include <stdlib.h>
 // #include <fcntl.h>
-// #include <stdio.h>
 
 // void test_list_size();
 // void test_list_push_front();
+//void test_atoi_base(void);
 
 int main(void) {
 	// test_list_size();
 	// test_list_push_front();
-	char *s = "1";
-	char *base = "";
-
-	ft_atoi_base(s, base);
+	// test_atoi_base();
+	ft_atoi_base("1", "121");
 }
