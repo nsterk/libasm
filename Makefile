@@ -1,10 +1,10 @@
-NAME				:=	test
+NAME		:=	test
 NAME_BONUS	:=	test_bonus
-CFLAGS			:=	-g
-IFLAGS			:=	-I lib/inc
-LIBASM_A		:= 	lib/libasm.a
+CFLAGS		:=	-g
+IFLAGS		:=	-I lib/inc
+LIBASM_A	:= 	lib/libasm.a
 
-VPATH 			:= tests
+VPATH 		:= tests
 
 SRCS	:=	main.c \
 			tests/test_strlen.c \
@@ -18,7 +18,7 @@ BONUS_SRCS := main_bonus.c \
 			tests/test_list_size.c \
 			tests/test_list_push_front.c
 
-OBJS					:=	$(SRCS:%.c=%.o)
+OBJS			:=	$(SRCS:%.c=%.o)
 BONUS_OBJS		:=	$(BONUS_SRCS:%.c=%.o)
 
 all: $(NAME) $(LIBASM_A)
@@ -34,7 +34,7 @@ $(LIBASM_A):
 
 bonus: $(LIBASM_A) $(NAME_BONUS)
 
-$(NAME_BONUS): $(BONUS_OBJS)
+$(NAME_BONUS): $(BONUS_OBJS) $(LIBASM_A)
 	@gcc $(BONUS_OBJS) $(LIBASM_A) $(CFLAGS) $(IFLAGS) -o $(NAME_BONUS)
 
 clean:

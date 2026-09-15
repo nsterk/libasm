@@ -6,9 +6,6 @@ ft_atoi_base:
 	push	rdi
 	push	rsi
 	jmp		.validate_base
-	pop		rsi
-	pop		rdi
-	ret
 
 .validate_base:
 	mov		rdi, rsi
@@ -16,7 +13,12 @@ ft_atoi_base:
 	cmp		rax, 0
 	je		.set_invalid
 
+.return:
+	pop		rsi
+	pop		rdi
+	ret
+
 .set_invalid:
 	xor		rax, rax
-
+	jmp		.return
 
