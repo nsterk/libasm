@@ -1,5 +1,7 @@
 	global	ft_strlen
 
+null_terminator equ 0
+
 ft_strlen:
 	xor		rax, rax
 	push	rbp
@@ -8,7 +10,7 @@ ft_strlen:
 	mov		[rbp - 8], rdi
 
 	.ft_strlen.loop:
-		cmp		[rdi], byte 0
+		cmp		[rdi], byte null_terminator
 		je		.ft_strlen.return
 		inc		rdi
 		jmp		.ft_strlen.loop
