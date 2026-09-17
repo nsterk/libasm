@@ -10,5 +10,5 @@ int main(void) {
 	// test_list_size();
 	// test_list_push_front();
 	// test_atoi_base();
-	ft_atoi_base("1", "121");
+	printf("ft_atoi_base(\"1\", \"123\") returns %i\n",ft_atoi_base("1", "12+3"));
 }
