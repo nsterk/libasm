@@ -106,5 +106,3 @@ ft_atoi_base:
 	.set_sign_flag_and_jump_inc_rdi_jump_convert:
 		mov		r11b, 1
 		jmp		.convert
-
-
