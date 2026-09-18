@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 	if (argc < 3) {
 		exit(0);
 	}
-	// printf("%i\n", ft_strlen("hohoho\0"));
+	
 	int ret = ft_atoi_base(argv[1], argv[2]);
 	printf("conerting %s in base %s: %i\n", argv[1], argv[2], ret);
 

@@ -73,7 +73,7 @@ ft_atoi_base:
 		cmp [rdi], byte space
 		je	.inc_rdi_and_jump_skip_whitespace
 
-	mov r11, 1		; This is where we will store whether str is negative (val = -1) or not (val = 1)
+	xor	r11b, r11b		; This is where we will store whether str is negative (val = 1) or not (val = 0)
 	
 	cmp [rdi], byte minus_sign
 	je .set_sign_flag_and_jump_inc_rdi_jump_get_value
@@ -107,7 +107,9 @@ ft_atoi_base:
 		jmp .get_value
 		
 	.handle_sign:
-		imul rax, r11
+		cmp	r11b, 0
+		je	.return
+		neg rax
 
 	.return:
 		ret
@@ -125,5 +127,5 @@ ft_atoi_base:
 		jmp		.get_value
 	
 	.set_sign_flag_and_jump_inc_rdi_jump_get_value:
-		mov		r11, -1
+		mov		r11, 1
 		jmp		.inc_rdi_and_jump_get_value
