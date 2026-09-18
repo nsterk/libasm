@@ -15,49 +15,47 @@ minus_sign		equ 0x2d
 
 ft_atoi_base:
 	xor		rax, rax
+	xor		r10, r10
 
 	.validate_base_loop:
-		cmp	[rsi + rax], byte null_terminator 		;Did we reach the null terminator yet?
+		cmp	[rsi + r10], byte null_terminator 		;Did we reach the null terminator yet?
 		je .validate_base_loop_done 				;If yes, exit the validate base loop
 
 		;The following instructions check whether the character at the current index is '+'. '-', or a whitespace character. If yes, the base is invalid
-		cmp [rsi + rax], byte plus_sign
-		je .set_invalid
-		cmp [rsi + rax], byte minus_sign
-		je	.set_invalid
-		cmp [rsi + rax], byte horizontal_tab
-		je	.set_invalid
-		cmp [rsi + rax], byte new_line
-		je	.set_invalid
-		cmp [rsi + rax], byte vertical_tab
-		je	.set_invalid
-		cmp [rsi + rax], byte form_feed
-		je	.set_invalid
-		cmp [rsi + rax], byte carriage_return
-		je	.set_invalid
-		cmp [rsi + rax], byte space
-		je	.set_invalid
+		cmp [rsi + r10], byte plus_sign
+		je .return
+		cmp [rsi + r10], byte minus_sign
+		je	.return
+		cmp [rsi + r10], byte horizontal_tab
+		je	.return
+		cmp [rsi + r10], byte new_line
+		je	.return
+		cmp [rsi + r10], byte vertical_tab
+		je	.return
+		cmp [rsi + r10], byte form_feed
+		je	.return
+		cmp [rsi + r10], byte carriage_return
+		je	.return
+		cmp [rsi + r10], byte space
+		je	.return
 
 		xor r8, r8
 
 	.check_dups_loop:
-		cmp rax, r8
-		je	.inc_rax_and_jump_val_base_loop
+		cmp r10, r8
+		je	.inc_r10_and_jump_val_base_loop
 		mov	r9b, [rsi + r8]
-		cmp r9b, [rsi + rax]
-		je	.set_invalid
+		cmp r9b, [rsi + r10]
+		je	.return
 		inc	r8
 		
-	.inc_rax_and_jump_val_base_loop:
-		inc	rax
+	.inc_r10_and_jump_val_base_loop:
+		inc	r10
 		jmp	.validate_base_loop
 
 	.validate_base_loop_done:
-		cmp rax, 2
-		jl	.set_invalid
-
-	mov r10, rax		; The length of our base is now in RAX. This is where we will be putting the converted value, so we're moving this value into r10.
-	xor	rax, rax		; Set RAX to 0 again so our conversion actually works
+		cmp r10, 2
+		jl	.return
 
 	.skip_whitespace:
 		cmp [rdi], byte null_terminator
@@ -75,18 +73,41 @@ ft_atoi_base:
 		cmp [rdi], byte space
 		je	.inc_rdi_and_jump_skip_whitespace
 
-	xor r11b, r11b		; This is where we will store whether str is negative (val != 0) or not (val == 0)
+	mov r11, 1		; This is where we will store whether str is negative (val = -1) or not (val = 1)
 	
 	cmp [rdi], byte minus_sign
-	je .set_sign_flag_and_jump_inc_rdi_jump_convert
+	je .set_sign_flag_and_jump_inc_rdi_jump_get_value
 	
 	cmp [rdi], byte plus_sign
-	je	.inc_rdi_and_jump_convert
+	je	.inc_rdi_and_jump_get_value
+
+	.get_value:
+		cmp [rdi], byte null_terminator
+		je	.handle_sign
+		xor	r9, r9
+		xor rdx, rdx
+	
+	.get_value_loop:
+		cmp rdx, r10	; r10 contains the length of our base. If we've reached the end of base, there is no value to assign to the current char and it means that we have our final number.
+		je	.handle_sign
+		mov	r9b, [rsi + rdx]
+		cmp	r9b, [rdi]
+		je .convert
+		inc	rdx
+		jmp .get_value_loop
 
 	.convert:
-		.get_value:
-			xor	r9, r9
-			.get_value_loop:
+		imul	rax, r10
+		add		rax, rdx
+		inc		rdi
+		; conversion functoin : num = num * base_len + value;
+			; num == rax
+			; base_len == r10
+			; value == rdx
+		jmp .get_value
+		
+	.handle_sign:
+		imul rax, r11
 
 	.return:
 		ret
@@ -99,10 +120,10 @@ ft_atoi_base:
 		inc		rdi
 		jmp		.skip_whitespace
 
-	.inc_rdi_and_jump_convert:
+	.inc_rdi_and_jump_get_value:
 		inc		rdi
-		jmp		.convert
+		jmp		.get_value
 	
-	.set_sign_flag_and_jump_inc_rdi_jump_convert:
-		mov		r11b, 1
-		jmp		.convert
+	.set_sign_flag_and_jump_inc_rdi_jump_get_value:
+		mov		r11, -1
+		jmp		.inc_rdi_and_jump_get_value

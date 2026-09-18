@@ -10,5 +10,7 @@ int main(void) {
 	// test_list_size();
 	// test_list_push_front();
 	// test_atoi_base();
-	printf("ft_atoi_base(\"1\", \"123\") returns %i\n",ft_atoi_base("1", "123"));
+	// printf("ft_atoi_base(\"12\", \"0123456789\") returns %i\n",ft_atoi_base("12", "0123456789"));
+	printf("ft_atoi_base(\"-12\", \"0123456789\") returns %i\n",ft_atoi_base("-12", "0123456789"));
+	// ft_atoi_base("-12", "0123456789");
 }
