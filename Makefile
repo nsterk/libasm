@@ -1,6 +1,6 @@
 NAME		:=	test
 NAME_BONUS	:=	test_bonus
-CFLAGS		:=	-g
+CFLAGS		:=	-g -fsanitize=address
 IFLAGS		:=	-I lib/inc
 LIBASM_A	:= 	lib/libasm.a
 
@@ -42,7 +42,7 @@ clean:
 	@rm -f $(OBJS)
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(BONUS_OBJS) $(NAME_BONUS)
 
 re: fclean all
 

@@ -2,7 +2,7 @@
 ; The function pointed to by cmp will be used as follows:
 ; (*cmp) ((list_ptr->data, other_list_ptr->data))
 
-; gonna do ft_list_remove_if first
+; the cmp function will cast the void ptr to whatever is needed. So just write my tests with a cmp function that casts to integer and don't think about the void ptr casting beyond that
 
 global ft_list_sort
 
