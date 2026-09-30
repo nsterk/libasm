@@ -35,6 +35,9 @@ t_list	*ft_list_new(t_list **head, int data) {
 void print_list(t_list *head) {
 	printf("---- list start ----\n");
 	while (head) {
+		printf("head ptr: %p\n", head);
+		printf("head->data ptr: %p\n", head->data);
+		printf("head->next ptr: %p\n", head->next);
 		printf("%i	\n", *(int*)(head->data));
 		head = head->next;
 	}
@@ -51,10 +54,12 @@ int main(void) {
 	// test_list_size();
 	// test_list_push_front();
 	// test_atoi_base();
-	int two = 2;
+	int two = 1;
 	t_list *head = ft_list_new(NULL, 0);
-	for (int i = 1; i < 4; i++) {
+	for (int i = 1; i < 10; i++) {
+		if (i == 6) ft_list_new(&head, 1);
 		ft_list_new(&head, i);
+		
 	}
 	// ft_list_new(&head, 1);
 	print_list(head);

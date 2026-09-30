@@ -44,7 +44,7 @@ ft_list_remove_if:
 
 	mov		r8, [rdi]
 	mov		[rbp - 8], r8		; rbp - 8 is where we store what in the C code is called "tmp"
-	mov		[rbp - 40], r8		; We're gonna need to put different stuff RDI when we call the cmp and free functions, but we don't want to lose the ptr to begin_list cause we may have to reset it later (if the first element contains the data_ref)
+	mov		[rbp - 40], rdi		; We're gonna need to put different stuff RDI when we call the cmp and free functions, but we don't want to lose the ptr to begin_list cause we may have to reset it later (if the first element contains the data_ref)
 	mov		[rbp - 16], rsi		; Move the ptr to data_ref into rbp - 16
 	mov		[rbp - 24], rdx		; Move the ptr to the cmp function into rbp - 24
 	mov		[rbp - 32], rcx		; Move the ptr to the free function into rbp - 32
@@ -53,10 +53,10 @@ ft_list_remove_if:
 	mov		r8, [rbp - 8]	; I just want to be able to access tmp->next (the offset at +8), this is why I'm moving it into a register
 	cmp		r8, 0x0			; Check that tmp is not null
 	je		.check_head
-	cmp		[r8 + 8], dword 0x0 	; R8 contains &tmp, so [R8 + 8] contains tmp->next. Check that tmp->next is not null
+	cmp		qword [r8 + 8], 0x0 	; R8 contains &tmp, so [R8 + 8] contains tmp->next. Check that tmp->next is not null
 	je		.check_head
 
-	; Now I need to prepare the arguments for the cmp function. Data_ref needs to go in RSI, tmp->data needs to go in RDI
+	; Now I need to prepare the arguments for the cmp function. Data_ref needs to go in RSI, tmp->next->data needs to go in RDI
 	mov		rsi, [rbp - 16]
 	mov		r12, [r8 + 8]	; The address of elem is not what i want to be putting into rdi for some reason. they are not the same. I want to see what happens when I pass the dereferenced value of [r8 + 8], instead of passin [r8 + 8]
 	mov		rdi, [r12]
@@ -87,5 +87,6 @@ ft_list_remove_if:
 	mov		rdi, r9
 	call	[rbp - 32]
 	; TO DO error handling
-	jmp	.move_to_next_node
+	; jmp	.move_to_next_node
+	jmp .loop_body
 
