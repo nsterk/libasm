@@ -35,16 +35,18 @@ ft_list_remove_if:
 
 	; I want to allocate space for 5 pointers: *tmp [rbp - 8], *data_ref [rbp - 16], *cmp_function [rbp - 24], *free_function [rbp - 32], and *begin_list [rbp - 40]. I also am going to save r12 on the stack. So subtract 48 bytes from stack pointer
 	sub		rsp, 48
+	mov		[rbp - 48], r12
 	cmp		rdi, 0x0	; RDI should contain a pointer to a pointer. We need to check for null before attempting to derefence
 	je		.return		
 
 	mov		r8, [rdi]
+	cmp		r8, 0x0
+	je		.return
 	mov		[rbp - 8], r8		; rbp - 8 is where we store what in the C code is called "tmp"
 	mov		[rbp - 16], rsi		; Move the ptr to data_ref into rbp - 16
 	mov		[rbp - 24], rdx		; Move the ptr to the cmp function into rbp - 24
 	mov		[rbp - 32], rcx		; Move the ptr to the free function into rbp - 32
 	mov		[rbp - 40], rdi		; We're gonna need to put different stuff RDI when we call the cmp and free functions, but we don't want to lose the ptr to begin_list cause we may have to reset it later (if the first element contains the data_ref)
-	mov		[rbp - 48], r12
 
 .loop_body:
 	mov		r8, [rbp - 8]	; I just want to be able to access tmp->next (the offset at +8), this is why I'm moving it into a register
