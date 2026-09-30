@@ -48,6 +48,7 @@ ft_list_remove_if:
 	mov		[rbp - 16], rsi		; Move the ptr to data_ref into rbp - 16
 	mov		[rbp - 24], rdx		; Move the ptr to the cmp function into rbp - 24
 	mov		[rbp - 32], rcx		; Move the ptr to the free function into rbp - 32
+	mov		[rbp - 48], r12
 
 .loop_body:
 	mov		r8, [rbp - 8]	; I just want to be able to access tmp->next (the offset at +8), this is why I'm moving it into a register
@@ -75,6 +76,7 @@ ft_list_remove_if:
 	jmp	.return
 
 .return:
+	mov r12, [rbp - 48]
 	mov	rsp, rbp
 	pop	rbp
 	ret

@@ -7,14 +7,15 @@
 // void test_atoi_base(void);
 
 int	cmp(void *data, void *data_ref) {
-	printf("***** cmp function ***** \n");
+	// printf("***** cmp function ***** \n");
 	// int base2 = *(int*)base;
-	int data_int = *((int*)data);
-	int data_ref_int = *((int*)data_ref);
-	printf("data_int: %i		data_ref_int: %i\n", data_int, data_ref_int);
+	// int data_int = *((int*)data);
+	// int data_ref_int = *((int*)data_ref);
+	// printf("data_int: %i		data_ref_int: %i\n", data_int, data_ref_int);
 
 	// printf("base: %i	check): %i\n", check2, base2);
-	return (data_int - data_ref_int);
+	// return (data_int - data_ref_int);
+	return (*((int*)data) - *((int*)data_ref));
 }
 
 t_list	*ft_list_new(t_list **head, int data) {
@@ -35,9 +36,9 @@ t_list	*ft_list_new(t_list **head, int data) {
 void print_list(t_list *head) {
 	printf("---- list start ----\n");
 	while (head) {
-		printf("head ptr: %p\n", head);
-		printf("head->data ptr: %p\n", head->data);
-		printf("head->next ptr: %p\n", head->next);
+		// printf("head ptr: %p\n", head);
+		// printf("head->data ptr: %p\n", head->data);
+		// printf("head->next ptr: %p\n", head->next);
 		printf("%i	\n", *(int*)(head->data));
 		head = head->next;
 	}
@@ -56,14 +57,20 @@ int main(void) {
 	// test_atoi_base();
 	int two = 1;
 	t_list *head = ft_list_new(NULL, 0);
-	for (int i = 1; i < 10; i++) {
-		if (i == 6) ft_list_new(&head, 1);
+	t_list *tmp;
+	for (int i = 1; i < 5; i++) {
+		if (i == 4) ft_list_new(&head, 1);
 		ft_list_new(&head, i);
-		
 	}
 	// ft_list_new(&head, 1);
 	print_list(head);
 	ft_list_remove_if(&head, &two, &cmp, &the_free_fct);
 	print_list(head);
+	while (head) {
+		tmp = head;
+		head = head->next;
+		the_free_fct(tmp);
+		// printf("?????\n");
+	}
 	return (0);
 }
