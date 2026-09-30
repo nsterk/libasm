@@ -13,7 +13,6 @@
 ;		if (!(cmp(data_ref, tmp->next->data))) {
 ;			t_list *dup = tmp->next;
 ;			tmp->next = tmp->next->next;
-;			free_fct(dup->data);
 ;			free_fct(dup);
 ;		}
 ;		tmp = tmp->next;
@@ -23,7 +22,6 @@
 ;	if (tmp) {
 ;		if (!(cmp(data_ref, tmp->data))) {
 ;			*begin_list = tmp->next;
-;			free_fct(tmp->data);
 ;			free_fct(tmp);
 ;		}
 ;	}
@@ -35,19 +33,17 @@ ft_list_remove_if:
 	push	rbp
 	mov		rbp, rsp
 
-	; I want to allocate space for 5 pointers: *tmp [rbp - 8], *data_ref [rbp - 16], *cmp_function [rbp - 24], *free_function [rbp - 32], and *begin_list [rbp - 40]
-	; So I need to subtract 40 from rsp
-	; except that will cause stack misalignment so we have to subtract 48 instead
+	; I want to allocate space for 5 pointers: *tmp [rbp - 8], *data_ref [rbp - 16], *cmp_function [rbp - 24], *free_function [rbp - 32], and *begin_list [rbp - 40]. I also am going to save r12 on the stack. So subtract 48 bytes from stack pointer
 	sub		rsp, 48
 	cmp		rdi, 0x0	; RDI should contain a pointer to a pointer. We need to check for null before attempting to derefence
 	je		.return		
 
 	mov		r8, [rdi]
 	mov		[rbp - 8], r8		; rbp - 8 is where we store what in the C code is called "tmp"
-	mov		[rbp - 40], rdi		; We're gonna need to put different stuff RDI when we call the cmp and free functions, but we don't want to lose the ptr to begin_list cause we may have to reset it later (if the first element contains the data_ref)
 	mov		[rbp - 16], rsi		; Move the ptr to data_ref into rbp - 16
 	mov		[rbp - 24], rdx		; Move the ptr to the cmp function into rbp - 24
 	mov		[rbp - 32], rcx		; Move the ptr to the free function into rbp - 32
+	mov		[rbp - 40], rdi		; We're gonna need to put different stuff RDI when we call the cmp and free functions, but we don't want to lose the ptr to begin_list cause we may have to reset it later (if the first element contains the data_ref)
 	mov		[rbp - 48], r12
 
 .loop_body:
@@ -61,7 +57,6 @@ ft_list_remove_if:
 	mov		rsi, [rbp - 16]
 	mov		r12, [r8 + 8]	; The address of elem is not what i want to be putting into rdi for some reason. they are not the same. I want to see what happens when I pass the dereferenced value of [r8 + 8], instead of passin [r8 + 8]
 	mov		rdi, [r12]
-	;mov	rdi, [r8 + 8]
 	call	[rbp - 24]
 	cmp		rax, 0
 	je		.remove_next_node
@@ -73,7 +68,22 @@ ft_list_remove_if:
 	jmp	.loop_body
 
 .check_head:
-	jmp	.return
+	mov	r9, [rbp - 40]		; r9 = **begin_list
+	mov	r8, [r9]			; tmp = *begin_list (r8 is our tmp)
+
+	mov	rsi, [rbp - 16]		; Move data_ref into rsi
+	mov	rdi, [r8]			; move tmp->data into rdi
+
+	call	[rbp - 24]
+	cmp		rax, 0
+	jne		.return			; If the data in head does not match data_ref, we don't need to remove the element. So just jump to return
+
+	mov	r10, [r8 + 8]		; r10 = tmp->next
+	mov	[r9], r10			; *begin_list = tmp->next
+
+	mov		rdi, r8
+	call	[rbp - 32]
+	;jmp	.return
 
 .return:
 	mov r12, [rbp - 48]

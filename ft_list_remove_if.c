@@ -53,7 +53,6 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (
 	if (tmp) {
 		if (!(cmp(data_ref, tmp->data))) {
 			*begin_list = tmp->next;
-			free_fct(tmp->data);
 			free_fct(tmp);
 		}
 	}
@@ -68,7 +67,7 @@ int	main(void) {
 	elem->next = NULL;
 	// print_list(elem);
 	for (int i = 0; i < 4; i++) {
-		ft_list_new(&elem, i);
+		ft_list_new(&elem, 1);
 	}
 	ft_list_new(&elem, 2);
 	print_list(elem);

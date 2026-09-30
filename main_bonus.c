@@ -7,21 +7,12 @@
 // void test_atoi_base(void);
 
 int	cmp(void *data, void *data_ref) {
-	// printf("***** cmp function ***** \n");
-	// int base2 = *(int*)base;
-	// int data_int = *((int*)data);
-	// int data_ref_int = *((int*)data_ref);
-	// printf("data_int: %i		data_ref_int: %i\n", data_int, data_ref_int);
-
-	// printf("base: %i	check): %i\n", check2, base2);
-	// return (data_int - data_ref_int);
 	return (*((int*)data) - *((int*)data_ref));
 }
 
 t_list	*ft_list_new(t_list **head, int data) {
 	t_list *new = malloc(sizeof(t_list));
 	int *num = malloc(sizeof(int));
-	// printf("%i 	%p \n", data, num);
 	*num = data;
 	new->data = num;
 	new->next = NULL;	
@@ -36,9 +27,6 @@ t_list	*ft_list_new(t_list **head, int data) {
 void print_list(t_list *head) {
 	printf("---- list start ----\n");
 	while (head) {
-		// printf("head ptr: %p\n", head);
-		// printf("head->data ptr: %p\n", head->data);
-		// printf("head->next ptr: %p\n", head->next);
 		printf("%i	\n", *(int*)(head->data));
 		head = head->next;
 	}
@@ -50,17 +38,16 @@ void	the_free_fct(void *node) {
 	free((t_list*)node);
 }
 
-
 int main(void) {
 	// test_list_size();
 	// test_list_push_front();
 	// test_atoi_base();
 	int two = 1;
-	t_list *head = ft_list_new(NULL, 0);
+	t_list *head = ft_list_new(NULL, 1);
 	t_list *tmp;
-	for (int i = 1; i < 5; i++) {
-		if (i == 4) ft_list_new(&head, 1);
-		ft_list_new(&head, i);
+	for (int i = 0; i < 10; i++) {
+		// if (i == 4) ft_list_new(&head, 1);
+		ft_list_new(&head, 1);
 	}
 	// ft_list_new(&head, 1);
 	print_list(head);
@@ -70,7 +57,6 @@ int main(void) {
 		tmp = head;
 		head = head->next;
 		the_free_fct(tmp);
-		// printf("?????\n");
 	}
 	return (0);
 }
