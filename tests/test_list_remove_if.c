@@ -20,7 +20,6 @@ t_list	*ft_list_new(t_list **head, int data) {
 }
 
 void print_list(t_list *head, char *msg) {
-	// printf("&head: %p\n", head);
 	printf("%s", msg);
 	while (head) {
 		printf("%i	", *(int*)(head->data));
@@ -41,7 +40,6 @@ void	test_list_remove_if(void) {
 	t_list *head = ft_list_new(NULL, 1);
 	t_list *tmp;
 	for (int i = 0; i < 3; i++) {
-		// if (i == 4) ft_list_new(&head, 1);
 		ft_list_new(&head, i);
 	}
 	ft_list_new(&head, 1);
@@ -88,15 +86,7 @@ void	test_list_remove_if(void) {
 	printf(U_WHT"Empty list\n"RST);
 	head = NULL;
 
-	// for (int i = 0; i < 3; i++) {
-	// 	ft_list_new(&head, i + 99);
-	// }
 	print_list(head, "Before: ");
 	ft_list_remove_if(&head, &data_ref, &cmp, &the_free_fct);
 	print_list(head, "After:  ");
-	// while (head) {
-	// 	tmp = head;
-	// 	head = head->next;
-	// 	the_free_fct(tmp);
-	// }
 }

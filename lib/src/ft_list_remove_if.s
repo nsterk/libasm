@@ -15,7 +15,7 @@
 ;			tmp->next = tmp->next->next;
 ;			free_fct(dup);
 ;		}
-;		tmp = tmp->next;
+;		tmp = tmp->next;	
 ;
 ;	}
 ;	tmp = *begin_list;
@@ -35,8 +35,8 @@ ft_list_remove_if:
 
 	; I want to allocate space for 5 pointers: *tmp [rbp - 8], *data_ref [rbp - 16], *cmp_function [rbp - 24], *free_function [rbp - 32], and *begin_list [rbp - 40]. I also am going to save r12 on the stack. So subtract 48 bytes from stack pointer
 	sub		rsp, 48
-	mov		[rbp - 48], r12
-	cmp		rdi, 0x0	; RDI should contain a pointer to a pointer. We need to check for null before attempting to derefence
+	mov		[rbp - 48], r12		; r12 is a preserved register. We restore it in the return routine by popping it off the stack, so that means it needs to actually be on the stack before we potentially return.
+	cmp		rdi, 0x0			; RDI should contain a pointer to a pointer. We need to check for null before attempting to derefence
 	je		.return		
 
 	mov		r8, [rdi]
@@ -101,6 +101,4 @@ ft_list_remove_if:
 	mov		rdi, r9
 	call	[rbp - 32]
 	; TO DO error handling
-	; jmp	.move_to_next_node
 	jmp .loop_body
-

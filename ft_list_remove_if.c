@@ -7,8 +7,8 @@
 // 	struct s_list	*next;
 // }				t_list;
 
-int	cmp(int *base, int *check) {
-	return (*check - *base);
+int	cmp(void *base, void *check) {
+	return (*((int*)check) - *((int*)base));
 }
 
 void	ft_list_new(t_list **head, int data) {
