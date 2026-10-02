@@ -14,9 +14,10 @@ SRCS :=	src/ft_strlen.s \
 BONUS_SRCS	:=	src/ft_list_size.s \
 				src/ft_list_push_front.s \
 				src/ft_list_remove_if.s \
+				src/ft_list_sort.s \
 				src/ft_atoi_base.s
 
-OBJS				:=	$(SRCS:%.s=%.o)
+OBJS		:=	$(SRCS:%.s=%.o)
 BONUS_OBJS	:=	$(BONUS_SRCS:%.s=%.o)
 
 all:		$(NAME)

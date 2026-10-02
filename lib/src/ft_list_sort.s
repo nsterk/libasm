@@ -27,39 +27,103 @@ ft_list_sort:
 	push	rbp
 	mov		rbp, rsp
 
-	; t_list *tmp  			-> [rbp - 8]
-	; void *tmp_data		-> [rbp - 16]
-	; *begin_list ([rdi])	-> [rbp - 24]
-	; (*cmp) (RSI)			-> [rbp - 32]
-	sub		rsp, 32
+	; [rbp - 8 ]	t_list	*tmp
+	; [rbp - 16] 	void 	*tmp->data
+	; [rbp - 24]	t_list	*tmp->next	
+	; [rbp - 32]	void	*tmp->next->data
+	; [rbp - 40]	t_list	*begin_list
+	; [rbp - 48]	function (*cmp)
+	sub		rsp, 56
 	
 	cmp	rdi, 0x0
 	je	.return
-	cmp	[rdi], 0x0
+	cmp	qword [rdi], 0x0
 	je	.return
 
-	mov	[rbp - 24], [rdi]
-	mov	[rbp - 32], rsi
+	mov	r8, [rdi]
+	mov	[rbp - 40], r8
+	mov	[rbp - 48], rsi
 
 	; Now we want to check if the list is bigger than 1. If not, we have to return
-	mov		rdi, [rbp - 24]
+	mov		rdi, [rbp - 40]
 	call	ft_list_size
 	cmp		rax, 2
 	jl		.return 
 
-.check_sorted:
-	mov	[rbp - 8], [rbp - 24]	; tmp = *begin_list
-	mov	r8,	[rbp - 8]			; I want to get to tmp->data, so ill need to dereference
-	mov	r9, [r8]				; Now tmp->data is in r9
-	mov	r10, [r8 + 8]			; Now a ptr to tmp->next is in r10
-	mov	r10, [r10]
+.init_check_sorted:
+	mov	r8, [rbp - 40]
+	mov [rbp - 8], r8	; tmp = *begin_list
 
+.check_sorted:
+	cmp	qword [rbp - 8], 0x0	; check if tmp is null. If it is that means the list is sorted, so return
+	je	.return
+	mov	r8, [rbp - 8]			; r8 = tmp
+	cmp	qword [r8 + 8], 0x0		; check if tmp->next is null
+	je	.return					; If it is then we have looped the entire list and all elements were sorted
+	mov	r9, [r8]				; r9 = tmp->data
+	mov [rbp - 16], r9			; [rbp - 16] = tmp->data
+	mov	r9, [r8 + 8]			; r9 = tmp->next
+	mov	[rbp - 24], r9			; [rbp - 24] = tmp->next
+	mov	r9, [r9]				; r9 = tmp->next->data
+	mov	[rbp - 32], r9			; [rbp - 32] = tmp->next->data
+
+	; prepare the arguments for the cmp function
+	mov	rdi, [rbp - 16]
+	mov	rsi, [rbp - 32]
+
+	; call the cmp function
+	call [rbp - 48]
+	cmp	rax, 0
+	
+	; if rax > 0 jump to init_tmp (or whatever the start of the inner loop is going to be called)
+	jg	.init_tmp
+
+	; tmp = tmp->next
+	mov	r11, [rbp - 24]
+	mov [rbp - 8], r11
+	jmp	.check_sorted
 
 .init_tmp:
-	mov	[rbp - 8], [rbp - 24]	; tmp = *begin_list
+	mov r8, [rbp - 40]	; tmp = *begin_list part 1
+	mov [rbp - 8], r8	; tmp = *begin_list prt 2
 
 .loop_list:
+	cmp	qword [rbp - 8], 0x0	; check if tmp is null. If it is that means that we finished a sorting iteration and need to check if the list is sorted
+	je	.init_check_sorted
+	
+	mov	r8, [rbp - 8]			; r8 = tmp
+	cmp	qword [r8 + 8], 0x0		; check if tmp->next is null
+	je	.init_check_sorted		; If it is then we have looped the entire list w our shitty sorting algorithm and ew need to check if the list is now sorted
+	
+	mov	r9, [r8]				; r9 = tmp->data
+	mov [rbp - 16], r9			; [rbp - 16] = tmp->data
+	mov	r9, [r8 + 8]			; r9 = tmp->next
+	mov	[rbp - 24], r9			; [rbp - 24] = tmp->next
+	mov	r9, [r9]				; r9 = tmp->next->data
+	mov	[rbp - 32], r9			; [rbp - 32] = tmp->next->data
 
+	; prepare the arguments for the cmp function
+	mov	rdi, [rbp - 16]
+	mov	rsi, [rbp - 32]
+
+	call [rbp - 48]
+	cmp	rax, 0
+	
+	; if rax > 0 jump to init_tmp (or whatever the start of the inner loop is going to be called)
+	jle .next_elem_loop_list
+
+	; if rax <= 0 we will be executing the following code before landing in .next_elem_loop_list. This is where we swap the elements' data
+	mov	r9, [rbp - 8]
+	mov r10, [rbp - 32]
+	mov	[r9], r10
+	mov	r9, [rbp - 24]
+	mov r10, [rbp - 16]
+	mov	[r9], r10
+
+.next_elem_loop_list:
+	mov	r11, [rbp - 24]
+	mov [rbp - 8], r11
+	jmp	.loop_list
 
 .return:
 	mov	rsp, rbp

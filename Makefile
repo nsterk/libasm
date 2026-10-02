@@ -1,7 +1,7 @@
 NAME		:=	test
 NAME_BONUS	:=	test_bonus
 CFLAGS		:=	-g -fsanitize=address
-IFLAGS		:=	-I lib/inc
+IFLAGS		:=	-I lib/inc -I tests/inc
 LIBASM_A	:= 	lib/libasm.a
 
 VPATH 		:= tests
@@ -15,6 +15,7 @@ SRCS	:=	main.c \
 			tests/test_strcpy.c \
 
 BONUS_SRCS := main_bonus.c \
+			tests/list_utils.c \
 			tests/test_list_size.c \
 			tests/test_list_push_front.c \
 			tests/test_atoi_base.c \
