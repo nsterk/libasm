@@ -77,7 +77,7 @@ void ft_list_sort(t_list **begin_list, int (*cmp)()) {
 int main(void) {
 	t_list *head = ft_list_new(NULL, 3);
 	t_list *tmp = NULL;
-	ft_list_new(&head, 8);
+	ft_list_new(&head, 8); 
 	ft_list_new(&head, 6);
 	ft_list_new(&head, 1);
 	ft_list_new(&head, 9);

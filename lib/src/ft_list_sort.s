@@ -40,6 +40,9 @@ ft_list_sort:
 	cmp	qword [rdi], 0x0
 	je	.return
 
+	cmp rsi, 0x0
+	je	.return
+
 	mov	r8, [rdi]
 	mov	[rbp - 40], r8
 	mov	[rbp - 48], rsi
@@ -112,6 +115,8 @@ ft_list_sort:
 	call [rbp - 48]
 	
 	js .next_elem_loop_list
+	cmp rax, 0x0
+	je .next_elem_loop_list
 
 	; if rax < 0 we will be executing the following code before landing in .next_elem_loop_list. This is where we swap the elements' data
 

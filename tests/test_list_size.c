@@ -1,6 +1,7 @@
 #include <libasm.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <libasm_tests.h>
 
 void test_list_size() {
 	t_list head;

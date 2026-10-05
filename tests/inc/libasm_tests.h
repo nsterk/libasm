@@ -35,10 +35,14 @@ void	test_list_size(void);
 void	test_list_push_front(void);
 void	test_atoi_base(void);
 void	test_list_remove_if(void);
+void	test_list_sort(void);
 
 t_list	*ft_list_new(t_list **head, int data);
+t_list	*ft_list_new_charptr(t_list **head, char *data);
 void	print_list(t_list *head, char *msg);
+void	print_char_list(t_list *head, char *msg);
 void	the_free_fct(void *node);
 int		cmp(void *data, void *data_ref);
+void	free_list(t_list *head);
 
 #endif

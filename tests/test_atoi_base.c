@@ -1,5 +1,6 @@
 #include <libasm.h>
 #include <stdlib.h>
+#include <libasm_tests.h>
 /**
 TO DO ASSEMBLY CODE
 

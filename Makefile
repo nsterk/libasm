@@ -19,7 +19,8 @@ BONUS_SRCS := main_bonus.c \
 			tests/test_list_size.c \
 			tests/test_list_push_front.c \
 			tests/test_atoi_base.c \
-			tests/test_list_remove_if.c
+			tests/test_list_remove_if.c \
+			tests/test_list_sort.c
 
 OBJS			:=	$(SRCS:%.c=%.o)
 BONUS_OBJS		:=	$(BONUS_SRCS:%.c=%.o)
