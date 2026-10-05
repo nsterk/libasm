@@ -73,12 +73,15 @@ ft_list_sort:
 
 	; call the cmp function
 	call [rbp - 48]
-	cmp	rax, 0
+	js	.move_next_check_sorted 	; If the result of the previous calculation is negative it is in the correct order and we can move to next
+	cmp rax, 0
+	je	.move_next_check_sorted		; If the result is 0 also in correct order and we can move to next element 
 	
-	; if rax > 0 jump to init_tmp (or whatever the start of the inner loop is going to be called)
+	; If neither of the above checks apply it means the list is not sorted 
 	jg	.init_tmp
 
 	; tmp = tmp->next
+.move_next_check_sorted:
 	mov	r11, [rbp - 24]
 	mov [rbp - 8], r11
 	jmp	.check_sorted
@@ -107,12 +110,13 @@ ft_list_sort:
 	mov	rsi, [rbp - 32]
 
 	call [rbp - 48]
-	cmp	rax, 0
 	
-	; if rax > 0 jump to init_tmp (or whatever the start of the inner loop is going to be called)
-	jle .next_elem_loop_list
+	js .next_elem_loop_list
 
-	; if rax <= 0 we will be executing the following code before landing in .next_elem_loop_list. This is where we swap the elements' data
+	; if rax < 0 we will be executing the following code before landing in .next_elem_loop_list. This is where we swap the elements' data
+
+
+.swap_data:
 	mov	r9, [rbp - 8]
 	mov r10, [rbp - 32]
 	mov	[r9], r10
