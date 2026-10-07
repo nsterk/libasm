@@ -4,22 +4,15 @@
 #include <stdio.h>
 
 void test_list_push_front() {
-	t_list **head = NULL;
+	t_list *head = NULL;
+	ft_list_new(&head, 88);
+	ft_list_new(&head, 1);
 	
-	int *num = malloc(sizeof(int));
 	int *num2 = malloc(sizeof(int));
 
-	t_list *elem1 = malloc(sizeof(t_list));
-	head = &elem1;
-	*num = 88;
-	elem1->data = num;
-	elem1->next = NULL;
-
 	*num2 = 99;
-	printf("(*head)->data befoer list push fornt: %p\n", (*head)->data);
-	printf("%i\n", *(int*)(*head)->data);
-	ft_list_push_front(head, num2);
-	printf("(*head)->data after list push fornt: %p\n", (*head)->data);
-	printf("%i\n", *(int*)(*head)->data);
-	printf("%i\n", *(int*)(*head)->next->data);
+	print_list(head, "Before: \n");
+	ft_list_push_front(&head, num2);
+	print_list(head, "After: \n");
+	free_list(head);
 }

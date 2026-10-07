@@ -25,7 +25,10 @@ t_list	*ft_list_new(t_list **head, int data) {
 	*num = data;
 	new->data = num;
 	new->next = NULL;	
-	if (!head || !(*head)) return new;
+	if (head && !(*head)) {
+		*head = new;
+		return new;
+	}
 
 	t_list *tmp = *head;
 	while (tmp->next) tmp = tmp->next;
