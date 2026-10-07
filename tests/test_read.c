@@ -1,4 +1,5 @@
 #include <libasm.h>
+#include <libasm_tests.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <stdio.h>
@@ -6,7 +7,7 @@
 void test_read() {
 	int fd1, fd2;
 
-    printf(BACK_GRN" ft_read "RST"\n");
+    printf(GRN"\nft_read\n"RST);
 	fd1 = open("tests/readText.txt", O_RDWR);
     fd2 = open("tests/readText.txt", O_RDWR);
 	char tmp[] = "\0\0\0\0\0";

@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <libasm.h>
+#include <libasm_tests.h>
 
 void test_strcpy() {
-	printf(BACK_GRN" ft_strcpy "RST"\n");
+	printf(GRN"\nft_strcpy\n"RST);
 	char tmp3[] = "momo\0";
 	char tmp4[] = "\0\0\0\0\0\0\0\0";
 

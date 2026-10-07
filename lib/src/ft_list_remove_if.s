@@ -1,10 +1,6 @@
 ; void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 ; RDI holds **begin_list, RSI holds *data_ref, RDX holds cmp ft ptr, RCX holds free ft ptr 
 
-; The functions pointed to by cmp and free_fct will be used as:
-; (*cmp)(list_ptr->data, data_ref);
-; (*free_fct)(list_ptr->data);
-
 ;void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *)) {
 ;	if (!begin_list || !(*begin_list)) return ;
 ;	t_list	*tmp = *begin_list;
@@ -100,5 +96,4 @@ ft_list_remove_if:
 	mov		[r8 + 8], r10	; tmp->next = tmp->next->next
 	mov		rdi, r9
 	call	[rbp - 32]
-	; TO DO error handling
 	jmp .loop_body

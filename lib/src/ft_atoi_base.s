@@ -10,9 +10,6 @@ space			equ 0x20
 plus_sign		equ 0x2b
 minus_sign		equ 0x2d
 
-; TO DO
-; - add sign handling for str .(- or +)
-
 ft_atoi_base:
 	xor		rax, rax
 	xor		r10, r10
