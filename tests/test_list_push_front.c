@@ -4,6 +4,8 @@
 #include <stdio.h>
 
 void test_list_push_front() {
+	printf(GRN"ft_list_push_front\n"RST);
+	
 	t_list *head = NULL;
 	ft_list_new(&head, 88);
 	ft_list_new(&head, 1);
