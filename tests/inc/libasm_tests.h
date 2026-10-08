@@ -30,6 +30,8 @@
 #define RST				"\033[0m"
 
 #include <libasm.h>
+#include <stdio.h>
+#include <string.h>
 
 void	test_list_size(void);
 void	test_list_push_front(void);
