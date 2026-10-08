@@ -44,5 +44,5 @@ void test_write() {
 	/* Test 4 */
 	printf("Test 4 - writing \"Momo\" to stdout: \n");
 
-	ft_write(1, "Momo", 4);
+	ft_write(1, "Momo\n", 5);
 }

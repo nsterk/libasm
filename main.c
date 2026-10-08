@@ -22,8 +22,8 @@ void check_equal(int expected, int got) {
 
 int main(void) {
 	// test_strlen();
-	// test_write();
-	test_read();
+	test_write();
+	// test_read();
 	// test_strcmp();
 	// test_strdup();
 	// test_strcpy();
