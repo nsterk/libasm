@@ -1,8 +1,8 @@
-#include <libasm.h>
 #include <libasm_tests.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <stdio.h>
+
+void check_equal(int expected, int got);
 
 void test_read() {
 	int fd1, fd2;
@@ -12,13 +12,37 @@ void test_read() {
 	fd1 = open("tests/readText.txt", O_RDWR);
     fd2 = open("tests/readText.txt", O_RDWR);
 
-	char tmp[] = "\0\0\0\0\0";
-    char tmp2[] = "\0\0\0\0\0";
+	char ft_read_dest[] = "\0\0\0\0\0";
+    char read_dest[] = "\0\0\0\0\0";
 
-	printf("ft_read: %li	read: %li\n", ft_read(fd1, tmp, 4), read(fd2, tmp2, 4));
-	printf("Bytes read by ft_read: %s\n", tmp);
-    printf("Bytes read by read: %s\n", tmp2);
+	/* Test 1 */
+	printf("Test 1 - return value successful read: ");
+	check_equal((int)read(fd2, read_dest, 4), (int)ft_read(fd1, ft_read_dest, 4));
+
+	/* Test 2 */
+	printf("Test 2 - comparing the actual bytes read: ");
+	if (strcmp(read_dest, ft_read_dest)) {
+		printf(RED"KO"RST);
+		printf("Expected: %s	Got: %s\n", read_dest, ft_read_dest);
+	} else printf(GRN"OK\n"RST);
 
    	close(fd1);
 	close(fd2);
+
+	/* Test 3 */
+	printf("Test 3 - Invalid file descriptor: ");
+	fd1 = -1;
+	check_equal((int)read(fd1, read_dest, 4), (int)ft_read(fd1, ft_read_dest, 4));
+
+	int stdin_copy;
+	stdin_copy = dup(STDIN_FILENO);
+
+	/* Test 4, stdin */
+	// char tmp[25] = {0};
+	// printf("Test 4 - stdin: \n");
+	// ft_read(stdin_copy, tmp, 25);
+	// printf("Bytes read: %s\n", tmp);
+
+	// dup2(stdin_copy, STDIN_FILENO);
+
 }

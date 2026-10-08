@@ -1,8 +1,4 @@
-#include <libasm.h>
 #include <libasm_tests.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <stdio.h>
 
 void test_strdup() {
 	printf("\n-------- %-10s --------\n", "ft_strdup");

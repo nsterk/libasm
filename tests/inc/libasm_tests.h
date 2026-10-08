@@ -32,6 +32,7 @@
 #include <libasm.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 void	test_list_size(void);
 void	test_list_push_front(void);

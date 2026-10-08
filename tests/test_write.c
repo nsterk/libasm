@@ -1,12 +1,11 @@
-#include <libasm.h>
 #include <libasm_tests.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <stdio.h>
 
 static int write_errno;
 static int ft_write_errno;
-void print_ret_fail(int expected, int got);
+
+void check_equal(int expected, int got);
 
 void test_write() {
 	printf("\n-------- %-10s --------\n", "ft_write");
@@ -21,9 +20,8 @@ void test_write() {
 	ft_write_return = ft_write(fd1, str, 4);
 	write_return = write(fd1, str, 4);
 	close(fd1);
-	if (ft_write_return != write_return) {
-		print_ret_fail(write_return, ft_write_return);
-	} else printf(GRN"OK\n"RST);
+
+	check_equal(write_return, ft_write_return);
 
 	/* Test 2 */
 	printf("Test 2 - return value failed write call: ");
@@ -35,15 +33,16 @@ void test_write() {
 	ft_write_return = ft_write(fd1, "hello", 2);
 	ft_write_errno = errno;
 
-	if (write_return != ft_write_return) {
-		print_ret_fail(write_return, ft_write_return);
-	} else printf(GRN"OK\n"RST);
+	check_equal(write_return, ft_write_return);
 
 	/* Test 3 */
 	printf("Test 3 - errno failed write call: ");
-		if (write_errno != ft_write_errno) {
-		print_ret_fail(write_errno, ft_write_errno);
-	} else printf(GRN"OK\n"RST);
+	check_equal(write_errno, ft_write_errno);
 
 	close(fd1);
+
+	/* Test 4 */
+	printf("Test 4 - writing \"Momo\" to stdout: \n");
+
+	ft_write(1, "Momo", 4);
 }

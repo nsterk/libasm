@@ -20,6 +20,8 @@ void test_list_size() {
 
 	printf("Size returned for empty list: %i\n", ft_list_size(NULL));
 
+	/* This test takes a minute or so to run which is why it is commented out */
+	
 	// {
 	// 	t_list *head = NULL;
 	// 	int len = 100000;
