@@ -7,11 +7,14 @@
 void test_read() {
 	int fd1, fd2;
 
-    printf(GRN"\nft_read\n"RST);
+    printf("\n-------- %-10s --------\n", "ft_read");
+
 	fd1 = open("tests/readText.txt", O_RDWR);
     fd2 = open("tests/readText.txt", O_RDWR);
+
 	char tmp[] = "\0\0\0\0\0";
     char tmp2[] = "\0\0\0\0\0";
+
 	printf("ft_read: %li	read: %li\n", ft_read(fd1, tmp, 4), read(fd2, tmp2, 4));
 	printf("Bytes read by ft_read: %s\n", tmp);
     printf("Bytes read by read: %s\n", tmp2);

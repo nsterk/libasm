@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 void test_strdup() {
-	printf(GRN"\nft_strdup\n"RST);
+	printf("\n-------- %-10s --------\n", "ft_strdup");
 
 	{
 		char *s = "Please duplicate me omg";

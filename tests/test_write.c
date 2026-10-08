@@ -6,22 +6,44 @@
 
 static int write_errno;
 static int ft_write_errno;
+void print_ret_fail(int expected, int got);
 
 void test_write() {
-	printf(GRN"ft_write"RST"\n");
+	printf("\n-------- %-10s --------\n", "ft_write");
 
 	int fd1;
-	ssize_t ft_write_return = ft_write(1, "Momo\n", 5);
-	printf("%li\n", ft_write_return);
+	ssize_t ft_write_return, write_return;
+	char *str = "Momo";
 
-	fd1 = open("test_file", O_RDONLY | O_CREAT);
-	printf(U_WHT"Writing to a readonly file "RST"\n");
-	ssize_t write_return = write(fd1, "hello", 2);
+	/* Test 1 */
+	printf("Test 1 - writing to file with permissions: ");
+	fd1 = open("write_test_file", O_RDWR | O_CREAT);
+	ft_write_return = ft_write(fd1, str, 4);
+	write_return = write(fd1, str, 4);
+	close(fd1);
+	if (ft_write_return != write_return) {
+		print_ret_fail(write_return, ft_write_return);
+	} else printf(GRN"OK\n"RST);
+
+	/* Test 2 */
+	printf("Test 2 - return value failed write call: ");
+	fd1 = open("write_no_permissions_file", O_RDONLY | O_CREAT);
+
+	write_return = write(fd1, "hello", 2);
 	write_errno = errno;
-	printf("Write return value: %li	write errno: %i\n", write_return, write_errno);
+
 	ft_write_return = ft_write(fd1, "hello", 2);
 	ft_write_errno = errno;
-	printf("ft_write return value: %li	ft_write errno: %i\n", ft_write_return, ft_write_errno);
+
+	if (write_return != ft_write_return) {
+		print_ret_fail(write_return, ft_write_return);
+	} else printf(GRN"OK\n"RST);
+
+	/* Test 3 */
+	printf("Test 3 - errno failed write call: ");
+		if (write_errno != ft_write_errno) {
+		print_ret_fail(write_errno, ft_write_errno);
+	} else printf(GRN"OK\n"RST);
 
 	close(fd1);
 }

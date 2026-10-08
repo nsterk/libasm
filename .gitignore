@@ -7,3 +7,5 @@ gf2
 .vscode
 *.dSYM
 test_bonus
+write_no_permissions_file
+write_test_file
