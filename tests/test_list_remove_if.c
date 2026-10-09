@@ -4,9 +4,12 @@
 
 void	test_list_remove_if(void) {
 	printf(GRN"ft_list_remove_if\n"RST);
+
+	/* Test 1 */
 	printf(U_WHT"List contains data_ref at start, middle, and end\n"RST);
 	int data_ref = 1;
-	t_list *head = ft_list_new(NULL, 1);
+	t_list *head = NULL;
+	ft_list_new(&head, 1);
 	t_list *tmp;
 	for (int i = 0; i < 3; i++) {
 		ft_list_new(&head, i);
@@ -15,14 +18,12 @@ void	test_list_remove_if(void) {
 	print_list(head, "Before: ");
 	ft_list_remove_if(&head, &data_ref, &cmp, &the_free_fct);
 	print_list(head, "After:  ");
-	while (head) {
-		tmp = head;
-		head = head->next;
-		the_free_fct(tmp);
-	}
+	free_list(head);
 
+	/* Test 2 */
 	printf(U_WHT"List contains only data_ref\n"RST);
-	head = ft_list_new(NULL, 1);
+	head = NULL;
+	ft_list_new(&head, 1);
 
 	for (int i = 0; i < 3; i++) {
 		ft_list_new(&head, 1);
@@ -31,14 +32,12 @@ void	test_list_remove_if(void) {
 	print_list(head, "Before: ");
 	ft_list_remove_if(&head, &data_ref, &cmp, &the_free_fct);
 	print_list(head, "After:  ");
-	while (head) {
-		tmp = head;
-		head = head->next;
-		the_free_fct(tmp);
-	}
+	free_list(head);
 
+	/* Test 3 */
 	printf(U_WHT"List does not contain data_ref\n"RST);
-	head = ft_list_new(NULL, 99);
+	head = NULL;
+	ft_list_new(&head, 99);
 
 	for (int i = 0; i < 3; i++) {
 		ft_list_new(&head, i + 99);
@@ -46,11 +45,9 @@ void	test_list_remove_if(void) {
 	print_list(head, "Before: ");
 	ft_list_remove_if(&head, &data_ref, &cmp, &the_free_fct);
 	print_list(head, "After:  ");
-	while (head) {
-		tmp = head;
-		head = head->next;
-		the_free_fct(tmp);
-	}
+	free_list(head);
+
+	/* Test 4 */
 
 	printf(U_WHT"Empty list\n"RST);
 	head = NULL;

@@ -1,13 +1,6 @@
 #include <fcntl.h>
 #include <libasm_tests.h>
 
-void test_strlen();
-void test_write();
-void test_read();
-void test_strdup();
-void test_strcmp();
-void test_strcpy();
-
 void check_equal(int expected, int got) {
 	if (expected != got) {
 		printf(RED"KO"RST);

@@ -8,7 +8,8 @@ void	test_list_sort(void) {
 	/* UNSORTED LIST WITH *INT DATA */
 	{
 		printf(U_WHT"Unsorted list with *int data\n"RST);
-		t_list *head = ft_list_new(NULL, 3);
+		t_list *head = NULL;
+		ft_list_new(&head, 3);
 		ft_list_new(&head, 8);
 		ft_list_new(&head, 6);
 		ft_list_new(&head, 1);
@@ -39,7 +40,8 @@ void	test_list_sort(void) {
 	/* DUPLICATES */
 	{
 		printf(U_WHT"Contains duplicates\n"RST);
-		t_list *head = ft_list_new(NULL, 3);
+		t_list *head = NULL;
+		ft_list_new(&head, 3);
 		ft_list_new(&head, 8);
 		ft_list_new(&head, 6);
 		ft_list_new(&head, 1);
@@ -62,7 +64,8 @@ void	test_list_sort(void) {
 	/* LIST OF SIZE 1 */
 	{
 		printf(U_WHT"List of size 1\n"RST);
-		t_list *head = ft_list_new(NULL, 3);
+		t_list *head = NULL;
+		ft_list_new(&head, 3);
 		print_list(head, "Before: ");
 		ft_list_sort(&head, &cmp);
 		print_list(head, "After:  ");
@@ -72,7 +75,8 @@ void	test_list_sort(void) {
 	/* NULL PTR AS COMPARE FUNCTION PTR */
 	{
 		printf(U_WHT"Null ptr as compare function pointer\n"RST);
-		t_list *head = ft_list_new(NULL, 3);
+		t_list *head = NULL;
+		ft_list_new(&head, 3);
 		ft_list_new(&head, 1);
 		print_list(head, "Before: ");
 		ft_list_sort(&head, NULL);

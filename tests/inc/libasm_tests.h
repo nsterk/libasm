@@ -37,6 +37,13 @@
 #include <string.h>
 #include <stdlib.h>
 
+void	test_strlen();
+void	test_write();
+void	test_read();
+void	test_strdup();
+void	test_strcmp();
+void	test_strcpy();
+
 void	test_list_size(void);
 void	test_list_push_front(void);
 void	test_atoi_base(void);

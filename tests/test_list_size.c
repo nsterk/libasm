@@ -1,6 +1,3 @@
-#include <libasm.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <libasm_tests.h>
 
 void test_list_size() {
@@ -33,5 +30,4 @@ void test_list_size() {
 	// 	free_list(head);
 
 	// }
-
 }
