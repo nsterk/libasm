@@ -23,10 +23,10 @@ void check_equal_string(char *expected, char *got) {
 }
 
 int main(void) {
-	// test_strlen();
-	// test_write();
-	// test_read();
-	// test_strcmp();
-	// test_strdup();
+	test_strlen();
+	test_write();
+	test_read();
+	test_strcmp();
+	test_strdup();
 	test_strcpy();
 }

@@ -29,6 +29,9 @@
 
 #define RST				"\033[0m"
 
+/* ft_strlen large_len: also tested with yet another zero but at this point the real strlen as well as ft_strlen both get stack overflow */
+#define LARGE_LEN 1000000
+
 #include <libasm.h>
 #include <stdio.h>
 #include <string.h>

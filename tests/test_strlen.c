@@ -1,8 +1,5 @@
 #include <libasm_tests.h>
 
-/* Also tested with yet another zero but at this point the real strlen as well as ft_strlen both get stack overflow*/
-#define LARGE_LEN 1000000
-
 void check_equal(int expected, int got);
 
 void test_strlen() {

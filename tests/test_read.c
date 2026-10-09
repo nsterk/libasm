@@ -34,15 +34,10 @@ void test_read() {
 	fd1 = -1;
 	check_equal((int)read(fd1, read_dest, 4), (int)ft_read(fd1, ft_read_dest, 4));
 
-	int stdin_copy;
-	stdin_copy = dup(STDIN_FILENO);
-
 	/* Test 4, stdin */
-	// char tmp[25] = {0};
-	// printf("Test 4 - stdin: \n");
-	// ft_read(stdin_copy, tmp, 25);
-	// printf("Bytes read: %s\n", tmp);
-
-	// dup2(stdin_copy, STDIN_FILENO);
+	char tmp[25] = {0};
+	printf("Test 4 - stdin: \n");
+	ft_read(0, tmp, 25);
+	printf("Bytes read: %s\n", tmp);
 
 }
