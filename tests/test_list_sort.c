@@ -1,13 +1,11 @@
-#include <libasm.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <libasm_tests.h>
 
 void	test_list_sort(void) {
-	printf(GRN"ft_list_sort\n"RST);
-	/* UNSORTED LIST WITH *INT DATA */
+	printf("\n-------- %-10s --------\n", "ft_list_sort");
+	
 	{
-		printf(U_WHT"Unsorted list with *int data\n"RST);
+		/* Test 1 */
+		printf("Test 1 - Unsorted list with *int data\n");
 		t_list *head = NULL;
 		ft_list_new(&head, 3);
 		ft_list_new(&head, 8);
@@ -18,16 +16,17 @@ void	test_list_sort(void) {
 		ft_list_sort(&head, &cmp);
 		print_list(head, "After:  ");
 
-		printf(U_WHT"Already sorted list\n"RST);
+		/* Test 2 */
+		printf("\nTest 2 - Already sorted list\n");
 		print_list(head, "Before: ");
 		ft_list_sort(&head, &cmp);
 		print_list(head, "After:  ");
 		free_list(head);
 	}
 
-	/* UNSORTED LIST WITH *CHAR DATA*/
+	/* Test 3 */
 	{
-		printf(U_WHT"Unsorted list with char*data\n"RST);
+		printf("\nTest 3 - Unsorted list with char* data\n");
 		t_list *head = ft_list_new_charptr(NULL, "abc");
 		ft_list_new_charptr(&head, "zyx");
 		ft_list_new_charptr(&head, "aac");
@@ -37,51 +36,55 @@ void	test_list_sort(void) {
 		free_list(head);
 	}
 
-	/* DUPLICATES */
+	/* Test 4 */
 	{
-		printf(U_WHT"Contains duplicates\n"RST);
+		printf("\nTest 4 - Contains duplicates: ");
 		t_list *head = NULL;
 		ft_list_new(&head, 3);
 		ft_list_new(&head, 8);
 		ft_list_new(&head, 6);
 		ft_list_new(&head, 1);
 		ft_list_new(&head, 8);
-		print_list(head, "Before: ");
+		// print_list(head, "Before: ");
 		ft_list_sort(&head, &cmp);
-		print_list(head, "After:  ");
+		// print_list(head, "After:  ");
 		free_list(head);
+		printf(GRN"OK\n"RST);
 	}
 
-	/* EMPTY LIST */
+	/* Test 5 */
 	{
-		printf(U_WHT"Empty list\n"RST);
+		printf("Test 5 - Empty list: ");
 		t_list *head = NULL;
-		print_list(head, "Before: ");
+		// print_list(head, "Before: ");
 		ft_list_sort(&head, &cmp);
-		print_list(head, "After:  ");
+		// print_list(head, "After:  ");
+		printf(GRN"OK\n"RST);
 	}
 
-	/* LIST OF SIZE 1 */
+	/* Test 6 */
 	{
-		printf(U_WHT"List of size 1\n"RST);
+		printf("Test 6 - List of size 1: ");
 		t_list *head = NULL;
 		ft_list_new(&head, 3);
-		print_list(head, "Before: ");
+		// print_list(head, "Before: ");
 		ft_list_sort(&head, &cmp);
-		print_list(head, "After:  ");
+		// print_list(head, "After:  ");
 		free_list(head);
+		printf(GRN"OK\n"RST);
 	}
 
-	/* NULL PTR AS COMPARE FUNCTION PTR */
+	/* Test 7 */
 	{
-		printf(U_WHT"Null ptr as compare function pointer\n"RST);
+		printf("Test 7 - Null ptr as compare function pointer: ");
 		t_list *head = NULL;
 		ft_list_new(&head, 3);
 		ft_list_new(&head, 1);
-		print_list(head, "Before: ");
+		// print_list(head, "Before: ");
 		ft_list_sort(&head, NULL);
-		print_list(head, "After:  ");
+		// print_list(head, "After:  ");
 		free_list(head);
+		printf(GRN"OK\n"RST);
 	}
 
 }

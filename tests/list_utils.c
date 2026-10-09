@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include <libasm_tests.h>
 
 int	other_strlen(char *str) {
