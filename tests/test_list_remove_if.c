@@ -3,10 +3,10 @@
 #include <stdlib.h>
 
 void	test_list_remove_if(void) {
-	printf(GRN"ft_list_remove_if\n"RST);
+	printf("\n-------- %-10s --------\n", "ft_list_remove_if");
 
 	/* Test 1 */
-	printf(U_WHT"List contains data_ref at start, middle, and end\n"RST);
+	printf("Test 1 - List contains data_ref at start, middle, and end\n");
 	int data_ref = 1;
 	t_list *head = NULL;
 	ft_list_new(&head, 1);
@@ -21,7 +21,7 @@ void	test_list_remove_if(void) {
 	free_list(head);
 
 	/* Test 2 */
-	printf(U_WHT"List contains only data_ref\n"RST);
+	printf("\nTest 2 - List contains only data_ref\n"RST);
 	head = NULL;
 	ft_list_new(&head, 1);
 
@@ -35,7 +35,7 @@ void	test_list_remove_if(void) {
 	free_list(head);
 
 	/* Test 3 */
-	printf(U_WHT"List does not contain data_ref\n"RST);
+	printf("\nTest 3 - List does not contain data_ref\n"RST);
 	head = NULL;
 	ft_list_new(&head, 99);
 
@@ -48,8 +48,7 @@ void	test_list_remove_if(void) {
 	free_list(head);
 
 	/* Test 4 */
-
-	printf(U_WHT"Empty list\n"RST);
+	printf("\nTest 4 - Empty list\n");
 	head = NULL;
 
 	print_list(head, "Before: ");

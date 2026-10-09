@@ -1,7 +1,7 @@
 #include <libasm_tests.h>
 
 void test_list_size() {
-	printf(GRN"ft_list_size "RST"\n");
+	printf("-------- %-10s --------\n", "ft_list_size");
 
 	{
 		t_list *head = NULL;
@@ -10,12 +10,12 @@ void test_list_size() {
 			ft_list_new(&head, i);
 		}
 
-		printf("Size returned for a list with 3 elements: %i\n", ft_list_size(head));
+		printf("Test 1 - Size returned for a list with 3 elements: %i\n", ft_list_size(head));
 		free_list(head);
 
 	}
 
-	printf("Size returned for empty list: %i\n", ft_list_size(NULL));
+	printf("Test 2 - Size returned for empty list: %i\n", ft_list_size(NULL));
 
 	/* This test takes a minute or so to run which is why it is commented out */
 	
