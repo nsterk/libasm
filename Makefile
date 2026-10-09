@@ -4,8 +4,6 @@ CFLAGS		:=	-g -fsanitize=address
 IFLAGS		:=	-I lib/inc -I tests/inc
 LIBASM_A	:= 	lib/libasm.a
 
-VPATH 		:= tests
-
 SRCS	:=	main.c \
 			tests/test_strlen.c \
 			tests/test_write.c \
@@ -42,7 +40,7 @@ $(NAME_BONUS): $(BONUS_OBJS) $(LIBASM_A)
 	@gcc $(BONUS_OBJS) $(LIBASM_A) $(CFLAGS) $(IFLAGS) -o $(NAME_BONUS)
 
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	@rm -f $(NAME) $(BONUS_OBJS) $(NAME_BONUS)
